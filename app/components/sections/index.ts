@@ -7,3 +7,4 @@ export { OrganizersSection } from './OrganizersSection';
 export { RegistrationSection } from './RegistrationSection';
 export { FooterSection } from './FooterSection';
 export { default as SponsorsSection } from './SponsorsSection';
+export { TedxVjcet } from './TedxVjcet';

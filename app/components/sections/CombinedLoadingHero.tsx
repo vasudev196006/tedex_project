@@ -424,25 +424,65 @@ export const CombinedLoadingHero = ({
         </div>
       </div>
 
-      {/* Hero Section Image Layer - Hidden behind loading screen initially */}
+      {/* Hero Section 3-Layer Scene - Background + Artwork + Campus Cutout */}
       <div
         ref={heroImageRef}
         className="fixed top-0 opacity-50 left-0 pointer-events-none w-full h-dvh z-2 bg-[#050505] flex items-center justify-center overflow-hidden"
       >
+        {/* Layer 1: Campus Scene Background */}
         <Image
           ref={heroImageInnerRef}
-          src="/herobg_pc.png"
+          src="/vjcet-main.png"
           alt="Hero Background"
-          width={1920}
-          height={1080}
-          className="w-dvw h-dvh object-center md:object-[0%_23%] object-cover pointer-events-none transition-transform duration-100 ease-out"
-          style={{
-            transform: `translate(${parallaxTransform.x}px, ${parallaxTransform.y}px) scale(1.1)`
-          }}
+          fill
           priority
+          sizes="100vw"
+          className="w-full h-full object-cover object-center pointer-events-none transition-transform duration-100 ease-out"
+          style={{
+            transform: `translate(${parallaxTransform.x}px, ${parallaxTransform.y}px) scale(1.05)`
+          }}
         />
+
+        {/* Layer 2: TEDx VJCET Event Artwork (Middle layer behind campus cutout with fade-up) */}
+        <div 
+          className="absolute inset-0 w-full h-full z-1 pointer-events-none flex items-center justify-center transition-transform duration-100 ease-out"
+          style={{
+            transform: `translate(${parallaxTransform.x * 0.7}px, ${parallaxTransform.y * 0.7}px) scale(1.05)`
+          }}
+        >
+          <div className="relative aspect-[1672/941] w-full h-full max-w-full max-h-full">
+            <div className="absolute left-[2.74%] top-[13.82%] h-[86.18%] w-[97.26%] animate-fade-up">
+              <Image
+                src="/tedextxt-transparent.png"
+                alt="TEDx VJCET event artwork"
+                fill
+                priority
+                sizes="100vw"
+                className="object-contain object-center pointer-events-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Layer 3: Campus Buildings Cutout (Foreground layer in front of artwork) */}
+        <div 
+          className="absolute inset-0 w-full h-full z-2 pointer-events-none transition-transform duration-100 ease-out"
+          style={{
+            transform: `translate(${parallaxTransform.x}px, ${parallaxTransform.y}px) scale(1.05)`
+          }}
+        >
+          <Image
+            src="/cutout.png"
+            alt="VJCET campus at sunset"
+            fill
+            priority
+            sizes="100vw"
+            className="w-full h-full object-cover object-center pointer-events-none"
+          />
+        </div>
+
         {/* Mobile gradient overlay - top-left to bottom-right */}
-        <div className="absolute inset-0 md:hidden bg-linear-to-br from-black/70 via-black/20 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 z-3 md:hidden bg-linear-to-br from-black/70 via-black/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Hero Section TEDx Logo Layer - Zooms out into view */}
