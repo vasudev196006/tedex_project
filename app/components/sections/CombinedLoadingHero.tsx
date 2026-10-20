@@ -431,7 +431,7 @@ export const CombinedLoadingHero = ({
       >
         <Image
           ref={heroImageInnerRef}
-          src="/college-x.png"
+          src="/herobg_pc.png"
           alt="Hero Background"
           width={1920}
           height={1080}
