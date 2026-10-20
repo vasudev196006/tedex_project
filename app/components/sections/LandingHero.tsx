@@ -197,16 +197,18 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
       {/* LAYER 1 (BOTTOM): Background Campus Scene (vjcet-main-1.png) */}
       <div
         ref={bgLayerRef}
-        className="absolute inset-0 w-full h-full pointer-events-none scale-105 will-change-transform z-0"
+        className="absolute inset-0 w-full h-full pointer-events-none will-change-transform z-0"
       >
-        <Image
-          src="/vjcet-main-1.png"
-          alt="VJCET campus twilight sky"
-          fill
-          priority
-          sizes="100vw"
-          className="w-full h-full object-cover object-center pointer-events-none select-none"
-        />
+        <div className="relative w-full h-full scale-105 origin-center">
+          <Image
+            src="/vjcet-main-1.png"
+            alt="VJCET campus twilight sky"
+            fill
+            priority
+            sizes="100vw"
+            className="w-full h-full object-cover object-center pointer-events-none select-none"
+          />
+        </div>
       </div>
 
       {/* LAYER 1.5: Ambient Crimson Atmospheric Glow (Behind text) */}
@@ -238,19 +240,21 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
         </div>
       </div>
 
-      {/* LAYER 3 (TOPMOST): Campus Architecture Foreground Cutout (cutout.png) */}
+      {/* LAYER 3 (TOPMOST): Campus Architecture Foreground Cutout (cutout.png) - Enlarged by 10% from bottom to cover background buildings */}
       <div
         ref={cutoutLayerRef}
-        className="absolute inset-0 w-full h-full pointer-events-none scale-105 will-change-transform z-20"
+        className="absolute inset-0 w-full h-full pointer-events-none will-change-transform z-20"
       >
-        <Image
-          src="/cutout.png"
-          alt="VJCET campus foreground silhouette"
-          fill
-          priority
-          sizes="100vw"
-          className="w-full h-full object-cover object-center pointer-events-none select-none"
-        />
+        <div className="relative w-full h-full scale-[1.10] origin-bottom">
+          <Image
+            src="/cutout.png"
+            alt="VJCET campus foreground silhouette"
+            fill
+            priority
+            sizes="100vw"
+            className="w-full h-full object-cover object-center pointer-events-none select-none"
+          />
+        </div>
       </div>
 
       {/* Atmospheric depth lighting: Soft bottom blend to transition smoothly into #050505 */}
