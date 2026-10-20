@@ -4,7 +4,7 @@ import React, { useRef, useState, lazy, Suspense } from "react";
 import { Spotlight } from "@/app/components/ui";
 import { ScrollIndicator } from "@/app/components/ui/ScrollIndicator";
 import {
-  CombinedLoadingHero,
+  TedxVjcet,
   CountdownSection,
   AboutSection,
   FooterSection
@@ -28,7 +28,7 @@ export default function TEDxWebsite() {
       className="relative bg-[#050505] text-white font-sans overflow-x-hidden overflow-y-auto h-screen selection:bg-[#e62b1e] selection:text-white cursor-default"
     >
       <GlobalStyles />
-      <CombinedLoadingHero 
+      <TedxVjcet 
         scrollContainerRef={scrollContainerRef}
         onLoadStateChange={setIsPageLoaded}
         onContainerRefReady={setHeroContainerRef}
