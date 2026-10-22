@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 import { SVGGrid } from '@/app/components/ui/SVGGrid';
+import PatternWaves from '@/app/components/ui/PatternWaves';
 import { Organizer } from '@/app/types';
 
 export const OrganizersSection = () => {
@@ -15,6 +16,22 @@ export const OrganizersSection = () => {
 
   return (
     <div className="bg-[#111] py-24 border-t border-white/10 relative z-30 overflow-hidden">
+      {/* Pattern Waves Background */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <PatternWaves
+          preset="terminal"
+          color="#e62b1e"
+          backgroundColor="transparent"
+          opacity={0.3}
+          fade="edges"
+          fadeSize={0.4}
+          speed={0.25}
+          interactive
+          cursorSize={60}
+          cursorStrength={0.6}
+        />
+      </div>
+
       <SVGGrid opacity={0.2} gridSize={60} strokeWidth={0.8} dotSize={1.5} />
 
       <ParallaxBackground text="ORGANIZERS" direction={1} speed={0.35} opacity="opacity-[0.08]" className='-top-380 md:-top-90'/>

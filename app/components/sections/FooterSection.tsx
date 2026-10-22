@@ -3,11 +3,28 @@
 import React from 'react';
 import { MapPin, Mail, Phone, Globe } from 'lucide-react';
 import { SiInstagram, SiLinkedin, SiTed } from 'react-icons/si';
+import PatternWaves from '@/app/components/ui/PatternWaves';
 import { CONTACT, LOCATION } from '@/app/constants';
 
 export const FooterSection = () => {
   return (
     <footer id="footer" className="relative bg-black text-red-500 py-16 overflow-hidden z-5">
+      {/* Pattern Waves Background */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <PatternWaves
+          preset="silk"
+          color="#e62b1e"
+          backgroundColor="transparent"
+          opacity={0.25}
+          fade="top"
+          fadeSize={0.5}
+          speed={0.25}
+          interactive
+          cursorSize={60}
+          cursorStrength={0.6}
+        />
+      </div>
+
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-10 pointer-events-none"></div>
 

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 import { FocusedSpeakersGrid } from '@/app/components/ui/FocusedSpeakersGrid';
 import { SVGGrid } from '@/app/components/ui/SVGGrid';
+import PatternWaves from '@/app/components/ui/PatternWaves';
 import { speakers, speakerCounts } from '@/app/constants';
 
 // {
@@ -58,6 +59,21 @@ export const SpeakersSection = () => {
 
   return (
     <div id="speakers" className="relative z-20 bg-white text-black pt-24 md:pt-32 overflow-hidden min-h-[80vh]">
+      {/* Pattern Waves Background (Top white section) */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <PatternWaves
+          preset="silk"
+          color="#e62b1e"
+          backgroundColor="#ffffff"
+          opacity={0.25}
+          fade="edges"
+          fadeSize={0.4}
+          interactive
+          cursorSize={60}
+          cursorStrength={0.5}
+        />
+      </div>
+
       <ParallaxBackground text="SPEAKERS" direction={1} speed={0.5} className="-top-500 md:-top-400" textColor="text-black" opacity="opacity-[0.05]" />
 
       <div className="z-10 max-w-7xl px-5 mx-auto mb-16 flex flex-col md:flex-row justify-between border-b-4 border-black pb-6">
@@ -77,6 +93,20 @@ export const SpeakersSection = () => {
       {/* Card Rotation Section - Only show if there's at least 1 speaker */}
       {revealedSpeakersCount > 0 && (
         <div id="speakers" className="relative min-h-screen w-full flex items-center justify-center px-4 py-16 bg-[#050505]">
+          {/* Pattern Waves Background (Card stack section) */}
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <PatternWaves
+              preset="mesh"
+              color="#e62b1e"
+              backgroundColor="transparent"
+              opacity={0.3}
+              fade="edges"
+              fadeSize={0.4}
+              interactive
+              cursorSize={60}
+              cursorStrength={0.6}
+            />
+          </div>
           <SVGGrid opacity={0.4} gridSize={80} strokeWidth={0.5} dotSize={1} />
           <div className="flex w-full max-w-7xl mx-auto justify-center items-center flex-col">
             {/* Previous Button */}

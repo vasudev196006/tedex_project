@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
+import PatternWaves from '@/app/components/ui/PatternWaves';
 // import { FeatureCard } from '@/app/components/ui/FeatureCard';
 
 export const AboutSection = () => {
@@ -18,6 +19,22 @@ export const AboutSection = () => {
         <source src="/bg-video-2.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+
+      {/* Pattern Waves Background */}
+      <div className="absolute inset-0 pointer-events-none z-2">
+        <PatternWaves
+          preset="lines"
+          color="#ffffff"
+          backgroundColor="transparent"
+          opacity={0.3}
+          fade="edges"
+          fadeSize={0.4}
+          speed={0.25}
+          interactive
+          cursorSize={60}
+          cursorStrength={0.6}
+        />
+      </div>
 
       {/* Dark overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 z-5"></div>

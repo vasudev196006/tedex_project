@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
+import PatternWaves from '@/app/components/ui/PatternWaves';
 import { SPONSORS_DATA } from '@/app/constants';
 
 // Card for an individual sponsor in the grid
@@ -69,6 +70,21 @@ const SponsorsSection = () => {
       className="relative z-30 bg-black text-white py-20 shadow-[0_-50px_100px_rgba(0,0,0,1)] border-t border-white/5 overflow-hidden"
       style={{ background: 'radial-gradient(ellipse at center, #1b1b1b 0%, #050505 100%)' }}
     >
+      {/* Pattern Waves Background */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <PatternWaves
+          preset="pond"
+          color="#ffffff"
+          backgroundColor="transparent"
+          opacity={0.25}
+          fade="edges"
+          fadeSize={0.4}
+          speed={0.3}
+          interactive
+          cursorSize={60}
+          cursorStrength={0.6}
+        />
+      </div>
       <ParallaxBackground text="SPONSORS" direction={-1} speed={0.3} opacity="opacity-[0.08]" className="-top-60" />
       <div className="container mx-auto relative z-10 space-y-16">
         <h2 className="text-4xl md:text-7xl font-bold-display text-center uppercase">

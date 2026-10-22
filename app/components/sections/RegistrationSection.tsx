@@ -3,11 +3,28 @@
 import React from 'react';
 import { ArrowRight, Ticket } from 'lucide-react';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
+import PatternWaves from '@/app/components/ui/PatternWaves';
 import { CONTACT } from '@/app/constants';
 
 export const RegistrationSection = () => {
   return (
     <div id="registration" className="relative z-30 bg-[#e62b1e] text-white min-h-[90vh] flex flex-col items-center justify-center text-center p-6 overflow-hidden">
+      {/* Pattern Waves Background */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <PatternWaves
+          preset="silk"
+          color="#ffffff"
+          backgroundColor="transparent"
+          opacity={0.3}
+          fade="edges"
+          fadeSize={0.4}
+          speed={0.3}
+          interactive
+          cursorSize={60}
+          cursorStrength={0.6}
+        />
+      </div>
+
       {/* Restored customized background text settings from user */}
       <ParallaxBackground text="TICKETS" direction={1} speed={0.3} opacity="opacity-[0.1]" className="z-0 -top-50" />
 
