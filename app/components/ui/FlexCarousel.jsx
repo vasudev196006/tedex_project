@@ -966,12 +966,16 @@ const FlexCarousel = ({
       }
 
       let nextHover = '';
-      if (pointer.over && !pointer.dragging && introState.done && s.focusOnClick) {
+      if (pointer.over && !pointer.dragging && introState.done) {
         const hit = instances.find(
           inst => pointer.x >= inst.x0 && pointer.x <= inst.x1 && pointer.y >= inst.y0 && pointer.y <= inst.y1
         );
-        if (focus.target > 0) nextHover = 'close';
-        else if (hit) nextHover = 'open';
+        if (s.focusOnClick) {
+          if (focus.target > 0) nextHover = 'close';
+          else if (hit) nextHover = 'open';
+        } else if (hit) {
+          nextHover = 'pointer';
+        }
       }
       if (nextHover !== hover) {
         hover = nextHover;
@@ -1085,15 +1089,21 @@ const FlexCarousel = ({
       const [x, y] = localPoint(e);
       const hit = instances.find(inst => x >= inst.x0 && x <= inst.x1 && y >= inst.y0 && y <= inst.y1);
       if (!hit) return;
-      if (hit.index === activeIndex && Math.abs(goal - pos) < 2) {
-        callbacksRef.current.onSelect?.(hit.index, itemsRef.current[hit.index]);
-        if (s.focusOnClick) openFocus(hit.index);
-      } else {
-        const rel = (hit.x0 + hit.x1) / 2 - width / 2;
-        goal = snapPoint(m, pos + rel);
-        mode = 'spring';
-        if (s.focusOnClick) focus.pending = hit.index;
-        start();
+
+      const rel = (hit.x0 + hit.x1) / 2 - width / 2;
+      goal = snapPoint(m, pos + rel);
+      mode = 'spring';
+      dirty = true;
+      start();
+
+      callbacksRef.current.onSelect?.(hit.index, itemsRef.current[hit.index]);
+
+      if (s.focusOnClick) {
+        if (hit.index === activeIndex && Math.abs(goal - pos) < 2) {
+          openFocus(hit.index);
+        } else {
+          focus.pending = hit.index;
+        }
       }
     };
 
@@ -1249,7 +1259,15 @@ const FlexCarousel = ({
       tabIndex={0}
     >
       {captions && current && revealed && (
-        <div className="flex-carousel__caption" aria-hidden="true">
+        <div 
+          className="flex-carousel__caption" 
+          aria-hidden="true"
+          onClick={(e) => {
+            e.stopPropagation();
+            callbacksRef.current.onSelect?.(active, itemsRef.current[active]);
+          }}
+          style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+        >
           <span key={active} className="flex-carousel__title">
             {current.title || current.alt}
             {current.subtitle && <span className="flex-carousel__subtitle">{current.subtitle}</span>}

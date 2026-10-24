@@ -20,6 +20,10 @@
   cursor: zoom-out;
 }
 
+.flex-carousel[data-hover='pointer'] {
+  cursor: pointer;
+}
+
 .flex-carousel[data-dragging] {
   cursor: grabbing;
 }

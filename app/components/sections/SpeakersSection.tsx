@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 import { FocusedSpeakersGrid } from '@/app/components/ui/FocusedSpeakersGrid';
@@ -18,8 +18,20 @@ import { speakers, speakerCounts } from '@/app/constants';
 
 export const SpeakersSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const cardStackSectionRef = useRef<HTMLDivElement>(null);
 
   const revealedSpeakersCount = speakerCounts.revealed;
+
+  const handleSpeakerSelect = (index: number) => {
+    setCurrentIndex(index);
+    if (cardStackSectionRef.current) {
+      cardStackSectionRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'nearest'
+      });
+    }
+  };
 
   const nextSpeaker = () => {
     setCurrentIndex((prev) => (prev + 1) % speakers.length);
@@ -87,12 +99,16 @@ export const SpeakersSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto mb-16 px-3">
-        <FocusedSpeakersGrid speakers={speakers} />
+        <FocusedSpeakersGrid speakers={speakers} onSpeakerSelect={handleSpeakerSelect} />
       </div>
 
       {/* Card Rotation Section - Only show if there's at least 1 speaker */}
       {revealedSpeakersCount > 0 && (
-        <div id="speakers" className="relative min-h-screen w-full flex items-center justify-center px-4 py-16 bg-[#050505]">
+        <div 
+          ref={cardStackSectionRef} 
+          id="speaker-cards" 
+          className="relative min-h-screen w-full flex items-center justify-center px-4 py-16 bg-[#050505] scroll-mt-6"
+        >
           {/* Pattern Waves Background (Card stack section) */}
           <div className="absolute inset-0 pointer-events-none z-0">
             <PatternWaves
@@ -128,7 +144,12 @@ export const SpeakersSection = () => {
                 return (
                   <div
                     key={speaker.id}
-                    className={`absolute w-full flex max-w-5xl mx-auto p-4  md:px-6 md:pb-0  rounded-xl transition-all duration-500 ease-in-out border border-white shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-black`}
+                    onClick={() => {
+                      if (index !== currentIndex) {
+                        setCurrentIndex(index);
+                      }
+                    }}
+                    className={`absolute w-full flex max-w-5xl mx-auto p-4 md:px-6 md:pb-0 rounded-xl transition-all duration-500 ease-in-out border border-white shadow-[0_0_18px_rgba(239,68,68,0.6)] left-1/2 bg-black ${index !== currentIndex ? 'cursor-pointer hover:border-red-500' : ''}`}
                     style={getCardStyle(index)}
                   >
                     {speaker.name !== `SPEAKER ${speaker.id}` && speaker.role !== 'TO BE REVEALED' ? (

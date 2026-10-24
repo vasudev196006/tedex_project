@@ -6,9 +6,10 @@ import { Speaker } from '@/app/types';
 
 interface FocusedSpeakersGridProps {
   speakers: Speaker[];
+  onSpeakerSelect?: (index: number, speaker: Speaker) => void;
 }
 
-export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
+export const FocusedSpeakersGrid = ({ speakers, onSpeakerSelect }: FocusedSpeakersGridProps) => {
   const items: FlexCarouselItem[] = speakers.map(speaker => {
     const isPlaceholder = speaker.name === `SPEAKER ${speaker.id}` && speaker.role === 'TO BE REVEALED';
     return {
@@ -30,10 +31,13 @@ export const FocusedSpeakersGrid = ({ speakers }: FocusedSpeakersGridProps) => {
         gap={16}
         radius={16}
         squeeze={0.2}
-        focusOnClick={true}
+        focusOnClick={false}
         captions={true}
         captureWheel={true}
         autoplay={false}
+        onSelect={(index) => {
+          onSpeakerSelect?.(index, speakers[index]);
+        }}
       />
     </div>
   );

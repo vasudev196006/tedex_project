@@ -3,22 +3,10 @@
 import React from 'react';
 import { ParallaxBackground } from '@/app/components/ui/ParallaxBackground';
 import PatternWaves from '@/app/components/ui/PatternWaves';
-// import { FeatureCard } from '@/app/components/ui/FeatureCard';
 
 export const AboutSection = () => {
   return (
     <div id="about" className="relative z-10 bg-[#050505] py-20 shadow-[0_-50px_100px_rgba(0,0,0,1)] overflow-hidden border-t border-white/5">
-      {/* Background Video */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover opacity-20"
-        autoPlay
-        muted
-        loop
-        playsInline
-      >
-        <source src="/bg-video-2.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
 
       {/* Pattern Waves Background */}
       <div className="absolute inset-0 pointer-events-none z-2">
